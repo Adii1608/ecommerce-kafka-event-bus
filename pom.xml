@@ -8,8 +8,8 @@
 		<version>4.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>kafka-practice</artifactId>
+	<groupId>com.adityapatil</groupId>
+	<artifactId>ecommerce-kafka-event-bus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>E-Commerce Event Bus</name>
 	<description>Event-driven multi-service order processing platform built with Java 21, Spring Boot, and Apache Kafka (KRaft mode)</description>

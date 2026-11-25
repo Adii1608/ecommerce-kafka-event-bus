@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: kafka-practice
+    name: ecommerce-kafka-event-bus
 
   kafka:
     bootstrap-servers: localhost:9092
