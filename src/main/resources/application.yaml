@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: kafka-practice
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all # Guarantees all in-sync replicas acknowledge before producer receives success
+      retries: 3
+      properties:
+        enable.idempotence: true # Prevents duplicate messages if network fails during broker ACK
+
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false # Manual/Framework-managed commits for at-least-once guarantee
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        # Wrap JsonDeserializer with ErrorHandlingDeserializer to catch poisoned pills without crashing
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: true
+
+# Custom topic configuration names
+ecommerce:
+  topics:
+    orders-created: orders.created
+    orders-dlt: orders.created.DLT
+    payments-events: payments.events
+    inventory-events: inventory.events
